@@ -1,0 +1,26 @@
+<project name="mysanboxApp"  default="APIdeploy" basedir="." xmlns:sf="antlib:com.salesforce">
+
+    <property file="build.properties"/>
+	<property file="MailLogger.properties"/>	
+
+<!--<setproxy proxyhost="172.16.100.111" proxyport="8080"/> -->
+
+    <property environment="env"/>
+
+    <taskdef resource="com/salesforce/antlib.xml" uri="antlib:com.salesforce">
+        <classpath>
+            <pathelement location="../ant-salesforce.jar" />
+        </classpath>
+    </taskdef>
+
+<target name="Compile">
+<echo>compiling in progress </echo>
+<sf:deploy username="${sf.username}" password="${sf.password}" serverurl="${sf.serverurl}" deployroot="src" checkOnly="true" />
+</target>
+
+<target name="APIdeploy" depends="Compile">
+<echo>Deploying in progress </echo>
+<sf:deploy username="${sf.username}" password="${sf.password}" serverurl="${sf.serverurl}" deployroot="src"/>
+</target>
+
+</project>
